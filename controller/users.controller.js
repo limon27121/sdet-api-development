@@ -2,7 +2,9 @@ import User from "../models/user.model.js";
 
 export const get_users = async (req, res) => {
     try {
-        const users = await User.findAll()
+        const users = await User.findAll({
+            attributes: { exclude: ["password"] }
+        })
 
         res.status(200).json({
             message: "user data found",
@@ -19,7 +21,9 @@ export const get_users = async (req, res) => {
 export const get_user_by_id = async (req, res) => {
     try {
         const user_id = Number(req.params.id)
-        const user = await User.findByPk(user_id)
+        const user = await User.findByPk(user_id, {
+            attributes: { exclude: ["password"] }
+        })
 
         if (!user) {
             return res.status(404).json({
