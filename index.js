@@ -1,3 +1,6 @@
+// LEGACY - original single-file version, kept for reference only.
+// Not imported anywhere. Live entry point is server.js.
+
 import express from "express";
 import path from "path"
 import dotenv from "dotenv";
