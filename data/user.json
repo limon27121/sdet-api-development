@@ -1,0 +1,26 @@
+[
+  {
+    "userId": 1,
+    "userFullName": "Moontaser Limon",
+    "userEmail": "moontaser.limon@example.com",
+    "phoneNumber": "+8801711000001"
+  },
+  {
+    "userId": 2,
+    "userFullName": "Nusrat Jahan",
+    "userEmail": "nusrat.jahan@example.com",
+    "phoneNumber": "+8801711000002"
+  },
+  {
+    "userId": 3,
+    "userFullName": "Rakibul Hasan",
+    "userEmail": "rakibul.hasan@example.com",
+    "phoneNumber": "+8801711000003"
+  },
+  {
+    "userId": 4,
+    "userFullName": "Tanvir Ahmed",
+    "userEmail": "tanvir.ahmed@example.com",
+    "phoneNumber": "+8801711000004"
+  }
+]
