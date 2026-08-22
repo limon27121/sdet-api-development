@@ -36,6 +36,14 @@ export const sign_up = async (req, res) => {
         })
     } catch (error) {
         console.error(error)
+
+        // bad data from the client, not a server bug
+        if (error.name === "SequelizeValidationError") {
+            return res.status(400).json({
+                message: error.errors[0].message
+            })
+        }
+
         res.status(500).json({
             message: "something went wrong"
         })
