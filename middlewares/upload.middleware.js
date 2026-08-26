@@ -49,15 +49,26 @@ export const upload = multer({
     limits: { fileSize: 2 * 1024 * 1024 },
 })
 
+// multer's own wording ("Unexpected field", "File too large") does not tell the
+// caller what to change, so every code gets a message naming the fix
+const ERROR_MESSAGES = {
+    LIMIT_UNEXPECTED_FILE: 'the file must be sent in a field named "photo" (form-data key: photo, type: File)',
+    LIMIT_FILE_SIZE: "photo must be 2MB or smaller",
+    LIMIT_FILE_COUNT: 'only one photo can be uploaded at a time, remove the extra file rows',
+    LIMIT_PART_COUNT: "too many parts in the form, send only the photo file",
+    LIMIT_FIELD_KEY: "a form field name is too long",
+    LIMIT_FIELD_VALUE: "a form field value is too long",
+    LIMIT_FIELD_COUNT: "too many form fields, send only the photo file",
+    MISSING_FIELD_NAME: 'a form field was sent without a name, name it "photo"',
+}
+
 // turns multer's thrown errors into a normal json response
 export const handle_upload_error = (err, req, res, next) => {
     if (!err) return next()
 
     if (err instanceof multer.MulterError) {
         return res.status(400).json({
-            message: err.code === "LIMIT_FILE_SIZE"
-                ? "photo must be 2MB or smaller"
-                : err.message
+            message: ERROR_MESSAGES[err.code] ?? "the photo could not be uploaded, please try again"
         })
     }
 

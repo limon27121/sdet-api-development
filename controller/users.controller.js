@@ -55,7 +55,7 @@ export const upload_photo = async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({
-                message: "photo file is required"
+                message: 'no photo was attached, add a form-data field named "photo" with a file selected'
             })
         }
 
