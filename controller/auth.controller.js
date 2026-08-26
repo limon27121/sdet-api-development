@@ -25,15 +25,20 @@ const send_error = (res, error) => {
 
 export const sign_up = async (req, res) => {
     try {
+
+        //data pass to request-body
         const { firstname, lastname, email, phonenumber, password } = req.body
 
+
+         //after registration  we store user details without password for further use
         const user = await register_user({ firstname, lastname, email, phonenumber, password })
 
         res.status(201).json({
             message: "user created successfully",
             data: user
         })
-    } catch (error) {
+    } 
+    catch (error) {
         send_error(res, error)
     }
 }
@@ -41,10 +46,14 @@ export const sign_up = async (req, res) => {
 
 export const log_in = async (req, res) => {
     try {
+
+        //data pass to request-body
         const { email, password } = req.body
 
+        //after log in we store token,user-details from login-user function for further use
         const { token, user } = await login_user({ email, password })
-
+        
+        //response body after successful log-in
         res.status(200).json({
             message: "login successful",
             token,

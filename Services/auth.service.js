@@ -22,6 +22,7 @@ export const register_user = async ({ firstname, lastname, email, phonenumber, p
         throw new ServiceError(409, "email already registered")
     }
 
+    //password hashed
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const user = await User.create({
@@ -56,6 +57,8 @@ export const login_user = async ({ email, password }) => {
         throw new ServiceError(401, "invalid email or password")
     }
 
+
+ //create token based on role so that we can login as user and admin
     const token = jwt.sign(
         { id: user.id, email: user.email, role: user.role },
         process.env.SECRET_KEY,
